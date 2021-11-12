@@ -9,7 +9,7 @@ import tkinter.ttk as ttk
 
 root = Tk()
 root.title('AudioPlayer')
-root.iconbitmap('mp3player\\mp3.ico')
+root.iconbitmap('mp3player\\btn_images\\mp3.ico')
 root.geometry('470x600')
 root.resizable(width=0, height=0)
 
@@ -21,7 +21,7 @@ def add_song():
     song_list.insert(END, song)
 
 def add_songs():
-    songs = filedialog.askopenfilenames(title="Wybierz pliki", filetypes=(("mp3 Files", "*.mp3"),))
+    songs = filedialog.askopenfilenames(title="Wybierz pliki", filetypes=(("mp3 Files", "*.mp3"),("wav Files", "*.wav")))
 
     for song in songs:
         song_list.insert(END, song)
@@ -171,11 +171,11 @@ song_list.grid(row=0, column=0)
 
 #CONTROL BTNS
 #BTN_IMAGES
-back_btn_img = PhotoImage(file="mp3player\\back.png")
-forward_btn_img = PhotoImage(file="mp3player\\forward.png")
-play_btn_img = PhotoImage(file="mp3player\\play.png")
-pause_btn_img = PhotoImage(file="mp3player\\pause.png")
-stop_btn_img = PhotoImage(file="mp3player\\stop.png")
+back_btn_img = PhotoImage(file="mp3player\\btn_images\\back.png")
+forward_btn_img = PhotoImage(file="mp3player\\btn_images\\forward.png")
+play_btn_img = PhotoImage(file="mp3player\\btn_images\\play.png")
+pause_btn_img = PhotoImage(file="mp3player\\btn_images\\pause.png")
+stop_btn_img = PhotoImage(file="mp3player\\btn_images\\stop.png")
 
 #BTN_FRAME
 controls_frame = Frame(master_frame)
