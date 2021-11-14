@@ -1,4 +1,3 @@
-import os
 from tkinter import *
 from tkinter import filedialog
 import pygame
@@ -6,16 +5,27 @@ import os
 import time
 from mutagen.mp3 import MP3
 import tkinter.ttk as ttk
+import sys 
+from pathlib import Path 
 
+
+def resource_path(relative_path):
+    try: 
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+
+fp = resource_path(os.path.dirname(os.path.abspath(__file__)))
 root = Tk()
 root.title('AudioPlayer')
-root.iconbitmap('mp3player\\btn_images\\mp3.ico')
+root.iconbitmap(fp + "\mp3.ico")
 root.geometry('470x600')
 root.resizable(width=0, height=0)
 
+
 pygame.mixer.init()
-
-
 def add_song():
     song = filedialog.askopenfilename(title="Wybierz plik", filetypes=(("mp3 Files", "*.mp3"),("wav Files", "*.wav")))
     song_list.insert(END, song)
@@ -171,11 +181,11 @@ song_list.grid(row=0, column=0)
 
 #CONTROL BTNS
 #BTN_IMAGES
-back_btn_img = PhotoImage(file="mp3player\\btn_images\\back.png")
-forward_btn_img = PhotoImage(file="mp3player\\btn_images\\forward.png")
-play_btn_img = PhotoImage(file="mp3player\\btn_images\\play.png")
-pause_btn_img = PhotoImage(file="mp3player\\btn_images\\pause.png")
-stop_btn_img = PhotoImage(file="mp3player\\btn_images\\stop.png")
+back_btn_img = PhotoImage(file=fp + "\\back.png")
+forward_btn_img = PhotoImage(file=fp + "\\forward.png")
+play_btn_img = PhotoImage(file=fp + "\\play.png")
+pause_btn_img = PhotoImage(file=fp + "\\pause.png")
+stop_btn_img = PhotoImage(file=fp + "\\stop.png")
 
 #BTN_FRAME
 controls_frame = Frame(master_frame)
@@ -229,6 +239,8 @@ my_menu.add_cascade(label="Edycja", menu=remove_song_menu)
 remove_song_menu.add_command(label="Usuń piosenkę", command=del_song)
 remove_song_menu.add_command(label="Usuń wszystkie piosenki", command=del_songs)
 
+if getattr(sys, 'frozen', False): # Running as compiled
+        running_dir = sys._MEIPASS + "/files/" # pylint: disable=no-member
 
 root.mainloop()
 
